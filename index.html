@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Financeiro</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Meu Controle Financeiro</h1>
+  </header>
+
+  <section id="saldo">
+    <h2>Saldo Atual: R$ <span id="valor-saldo">0.00</span></h2>
+    <p>Receitas: R$ <span id="total-receitas">0.00</span></p>
+    <p>Despesas: R$ <span id="total-despesas">0.00</span></p>
+  </section>
+
+  <section id="lista-transacoes">
+    <h2>Transações</h2>
+    <ul id="transacoes"></ul>
+  </section>
+
+  <button onclick="window.location.href='adicionar.html'">Adicionar Transação</button>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
