@@ -1,42 +1,81 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
-  }
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  section {
-    background: #fff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
-  
-  label {
-    display: block;
-    margin: 10px 0;
-  }
-  
-  input, select, button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-  }
-  
-  button {
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #555;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+form#form-transacao {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+header {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 55px;
+  margin-bottom: 20px;
+}
+
+section {
+  background: #c4c2c2;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 55px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #c4c2c2;
+  border-radius: 55px;
+  padding: 10px 20px;
+  margin: 15px 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+input, select {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border: none;               
+  border-radius: 25px;        
+  box-sizing: border-box;     
+  outline: none;              
+  appearance: none;           
+  -webkit-appearance: none;   
+  -moz-appearance: none;     
+  background-color: white;
+}
+
+button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 25px;
+  display: block;
+  margin: 15px auto;
+  padding: 10px 40px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #707070;
+}
+
+#tipo{
+  border-radius: 25px;}
+
+#descricao{border-radius: 25px;}
+
+#valor{border-radius: 25px;}
+
+#categoria{border-radius: 25px;}
