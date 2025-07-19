@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Adicionar Transação</title>
-  <link rel="stylesheet" href="css/style.css" />
+ <link rel="stylesheet" href="css/style.css"> <!-- CSS global -->
+  <link rel="stylesheet" href="css/adicionar.css"> <!-- CSS específico -->
 </head>
 <body>
   <header>
@@ -38,7 +39,7 @@
     <button id="salvar" type="submit">Salvar</button>
   </form>
 
-  <button id="voltar" onclick="window.location.href='index.html'">Voltar</button>
+  <button type="button" onclick="window.history.back()">Voltar</button>
 
   <script src="js/adicionar.js"></script>
 </body>

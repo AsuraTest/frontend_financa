@@ -49,8 +49,16 @@
     <ul id="transacoes"></ul>
   </section>
 
+<section id="grafico-container" style="background: #c4c2c2; padding: 15px; margin: 20px 0; border-radius: 55px; height: 400px;">
+  <h2>Distribuição por Categoria</h2>
+  <div style="position: relative; height: 350px; width: 100%;">
+    <canvas id="grafico-pizza"></canvas>
+  </div>
+</section>
+
   <button onclick="window.location.href='adicionar.html'">Adicionar Transação</button>
 
   <script src="js/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

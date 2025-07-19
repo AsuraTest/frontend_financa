@@ -1,0 +1,41 @@
+/* Estilos específicos para a página de adição */
+body#pagina-adicionar {
+  justify-content: flex-start; /* Alinha o conteúdo no topo */
+}
+
+form#form-transacao {
+  background: #c4c2c2;
+  padding: 30px;
+  border-radius: 55px;
+  margin-top: 30px;
+  width: 90%;
+  max-width: 600px;
+padding-bottom: 0;
+}
+
+#form-transacao label {
+  background: #9b9999;
+  padding: 15px 20px; /* Reduz o padding lateral */
+  margin: 20px 0;
+  display: block;
+}
+
+#form-transacao input, 
+#form-transacao select {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.botoes-form {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.botoes-form button {
+  margin: 0;
+  flex: 1;
+  max-width: 200px;
+}
