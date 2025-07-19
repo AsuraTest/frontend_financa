@@ -107,9 +107,9 @@ function closeNav() {
 
 function toggleNav() {
   const sidebar = document.getElementById("sidebar");
-  if (sidebar.style.width === "250px") {
-    sidebar.style.width = "0";
+  if (sidebar.style.width === "150px") {
+    closeNav();
   } else {
-    sidebar.style.width = "250px";
+    openNav();
   }
 }
