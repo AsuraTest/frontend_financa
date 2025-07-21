@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Recuperar Senha</title>
+  <link rel="stylesheet" href="../css/recuperacao.css">
+</head>
+<body>
+  <header>
+    <div class="left"></div>
+    <h1>Recuperação de Senha</h1>
+    <div class="left"></div>
+  </header>
+
+  <div class="auth-container">
+    <form id="formRecuperarSenha">
+      <label>
+        E-mail:
+        <input type="email" id="email" required>
+      </label>
+      <button type="submit">Enviar Link</button>
+    </form>
+    <p id="mensagem"></p>
+    <a href="../index.html" class="voltar-link">Voltar ao Login</a>
+  </div>
+
+  <script src="../js/recuperacao.js"></script>
+</body>
+</html>

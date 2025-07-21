@@ -10,12 +10,12 @@ form#form-transacao {
   margin-top: 30px;
   width: 90%;
   max-width: 600px;
-padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 #form-transacao label {
   background: #9b9999;
-  padding: 15px 20px; /* Reduz o padding lateral */
+  padding: 15px 20px;
   margin: 20px 0;
   display: block;
 }
@@ -39,3 +39,5 @@ padding-bottom: 0;
   flex: 1;
   max-width: 200px;
 }
+
+

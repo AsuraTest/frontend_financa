@@ -1,3 +1,4 @@
+require('dotenv').config();
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
   
