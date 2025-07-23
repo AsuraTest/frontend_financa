@@ -15,7 +15,7 @@ async function checkApiHealth() {
                 'Origin': window.location.origin
             }
         });
-        return true; // Se não der erro, o servidor está respondendo
+        return true; 
     } catch (error) {
         console.error('API não está acessível:', error);
         return false;

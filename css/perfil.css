@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.auth-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #c4c2c2;
+    padding: 30px;
+    border-radius: 55px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.profile-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 25px;
+}
+
+.info-item {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 150px;
+}
+
+.danger-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #ffebee;
+    border-radius: 25px;
+    border: 1px solid #ffcdd2;
+}
+
+#delete-account-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#delete-account-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Mantendo consistência com seu estilo */
+button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #707070;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+#tituloperfil{
+    text-align: center;
+}

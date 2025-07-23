@@ -1,12 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Usuário</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="css/perfil.css">
 </head>
 <body>
-    <p>Mina rola</p>
+    <header>
+        <h1 id="tituloperfil">Meu Perfil</h1>
+    </header>
+
+    <div class="auth-container">
+
+        <!-- Informações -->
+        <section class="profile-section">
+            <h2>Informações Pessoais</h2>
+            <div class="info-item">
+                <span class="label">Nome:</span>
+                <span id="user-name">Carregando...</span>
+            </div>
+            <div class="info-item">
+                <span class="label">E-mail:</span>
+                <span id="user-email">Carregando...</span>
+            </div>
+        </section>
+
+        <!-- Edição -->
+        <section class="profile-section">
+            <h2>Editar Perfil</h2>
+            <form id="form-edit-profile">
+                <label>
+                    Novo Nome:
+                    <input type="text" id="edit-name" required>
+                </label>
+                <label>
+                    Novo E-mail:
+                    <input type="email" id="edit-email" required>
+                </label>
+                <button type="submit">Salvar Alterações</button>
+            </form>
+
+            <form id="form-change-password">
+                <h3>Alterar Senha</h3>
+                <label>
+                    Senha Atual:
+                    <input type="password" id="current-password" required>
+                </label>
+                <label>
+                    Nova Senha:
+                    <input type="password" id="new-password" required minlength="8">
+                </label>
+                <button type="submit">Alterar Senha</button>
+            </form>
+        </section>
+
+        <section class="danger-section">
+            <h2>Zona de Perigo</h2>
+            <button id="delete-account-btn">Excluir Minha Conta</button>
+        </section>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/perfil.js"></script>
 </body>
 </html>

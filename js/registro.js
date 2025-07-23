@@ -7,9 +7,9 @@ document.getElementById('form-registro').addEventListener('submit', async e => {
   
     try {
       const res = await fetch(`${API_BASE_URL}/usuarios/registro`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, senha })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, senha })
       });
   
       if (!res.ok) {
