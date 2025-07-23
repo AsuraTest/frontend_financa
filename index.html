@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <title>Dashboard Financeiro</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:,">
 </head>
 <body>
   <header>
   <div class="left"></div>
   <h1>Meu Controle Financeiro</h1>
-  <button class="openbtn" onclick="toggleNav()">
+  <button class="openbtn" id="menuButton" onclick="toggleNav()">
   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
   </svg>
@@ -57,9 +58,38 @@
   </div>
 </section>
 
-  <button onclick="window.location.href='adicionar.html'">Adicionar Transação</button>
-
-  <script src="js/index.js"></script>
+  <button onclick="teste()">Adicionar Transação</button>
+<script>
+  function teste() {
+    alert("Botão funcionando!");
+    window.location.href = 'adicionar.html';
+  }
+</script>
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/index.js"></script>
+<script>
+  // Garantia de que as funções existem
+  window.toggleNav = function() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) {
+      sidebar.style.width = sidebar.style.width === "150px" ? "0" : "150px";
+      const main = document.getElementById("main");
+      if (main) {
+        main.style.marginRight = sidebar.style.width === "150px" ? "150px" : "0";
+      }
+    }
+  };
+
+  window.closeNav = function() {
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("main");
+    if (sidebar && main) {
+      sidebar.style.width = "0";
+      main.style.marginRight = "0";
+    }
+  };
+</script>
 </body>
 </html>

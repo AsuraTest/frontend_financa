@@ -5,7 +5,7 @@ document.getElementById('form-login').addEventListener('submit', async e => {
     const senha = document.getElementById('senha').value;
   
     try {
-      const res = await fetch('http://localhost:3000/usuarios/login', {
+      const res = await fetch(`${API_BASE_URL}/usuarios/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })
@@ -40,7 +40,7 @@ document.getElementById('form-login').addEventListener('submit', async e => {
   }
 
   try {
-    const res = await fetch('http://localhost:3000/usuarios/recuperar-senha', {
+    const res = await fetch(`${API_BASE_URL}/usuarios/recuperar-senha`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })

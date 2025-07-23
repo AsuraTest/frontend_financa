@@ -1,4 +1,17 @@
+if (!window.API_CONFIG) {
+  alert('Configurações não carregadas. Redirecionando...');
+  window.location.href = 'index.html';
+}
 document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('token');
+  console.log('Token encontrado:', token ? 'Sim' : 'Não');
+  
+  if (!token) {
+    alert('Você precisa estar logado para adicionar transações');
+    window.location.href = 'login.html';
+    return;
+  }
+
   carregarCategorias();
   document.getElementById('form-transacao').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -10,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function carregarCategorias() {
   try {
     const token = localStorage.getItem('token'); 
+    console.log('Carregando categorias com token:', token ? 'Sim' : 'Não');
 
     if (!token) {
       alert('Você precisa estar logado para carregar categorias.');
@@ -17,7 +31,7 @@ async function carregarCategorias() {
       return;
     }
 
-    const response = await fetch('http://localhost:3000/categorias', {
+    const response = await fetch(`${API_BASE_URL}/categorias`, {
       headers: {
         'Authorization': `Bearer ${token}`  
       }
@@ -48,38 +62,58 @@ async function carregarCategorias() {
 
 
 async function salvarTransacao() {
-  const tipo = document.getElementById('tipo').value;
-  const descricao = document.getElementById('descricao').value;
-  const valor = document.getElementById('valor').value;
-  const categoria_id = document.getElementById('categoria').value;
-
-  const transacao = { tipo, descricao, valor, categoria_id };
-
   try {
-    const token = localStorage.getItem('token');  
-    
-    if (!token) {
-      alert('Você precisa estar logado para adicionar uma transação.');
+    const tipo = document.getElementById('tipo').value;
+    const descricao = document.getElementById('descricao').value;
+    const valor = parseFloat(document.getElementById('valor').value);
+    const categoria_id = document.getElementById('categoria').value;
+
+    if (!tipo || !descricao || !valor || !categoria_id) {
+      alert('Por favor, preencha todos os campos');
       return;
     }
 
+    const transacao = { 
+      tipo, 
+      descricao, 
+      valor, 
+      categoria_id: parseInt(categoria_id)
+    };
+
+    const token = localStorage.getItem('token');  
+    console.log('Salvando transação:', transacao);
+    console.log('Token presente:', !!token);
+    
+    if (!token) {
+      alert('Você precisa estar logado para adicionar uma transação.');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    };
+    console.log('Headers:', headers);
    
-    const response = await fetch('http://localhost:3000/transacoes', {
+    const response = await fetch(`${API_BASE_URL}/transacoes`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,  
-      },
+      headers: headers,
       body: JSON.stringify(transacao),
     });
 
+    console.log('Status da resposta:', response.status);
+    
     if (response.ok) {
-      window.location.href = 'index.html';  
+      alert('Transação salva com sucesso!');
+      window.location.href = 'index.html?reload=' + Date.now(); 
     } else {
       const errorData = await response.json();
-      alert(errorData.error || 'Erro ao salvar transação.');
+      console.error('Erro na resposta:', errorData);
+      alert(errorData.error || 'Erro ao salvar transação. Tente novamente.');
     }
   } catch (error) {
     console.error('Erro ao salvar transação:', error);
+    alert('Erro ao salvar transação. Verifique sua conexão e tente novamente.');
   }
 }

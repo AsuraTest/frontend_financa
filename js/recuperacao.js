@@ -5,7 +5,7 @@ document.getElementById('formRecuperarSenha')?.addEventListener('submit', async 
   const mensagem = document.getElementById('mensagem');
 
   try {
-    const response = await fetch('http://localhost:3000/usuarios/recuperar-senha',{
+    const response = await fetch(`${API_BASE_URL}/usuarios/recuperar-senha`,{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
@@ -30,7 +30,7 @@ document.getElementById('formRedefinirSenha')?.addEventListener('submit', async 
   }
 
   try {
-    const response = await fetch('http://localhost:3000/usuarios/redefinir-senha', {
+    const response = await fetch(`${API_BASE_URL}/usuarios/redefinir-senha`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, novaSenha })
