@@ -1,3 +1,35 @@
+/* Ícone de visualização de senha */
+.senha-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.senha-container input[type="password"],
+.senha-container input[type="text"] {
+  width: 100%;
+  padding-right: 38px;
+  box-sizing: border-box;
+}
+.toggle-senha-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  padding: 0 !important;
+  margin: 0;
+  font-size: 1.3em;
+  color: #333;
+  height: 28px;
+  width: 28px;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;

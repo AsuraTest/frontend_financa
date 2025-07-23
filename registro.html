@@ -21,8 +21,24 @@
       <input type="email" id="email" required>
       
       <label>Senha:</label>
-      <input type="password" id="senha" minlength="8" required>
-      
+      <div class="senha-container">
+        <input type="password" id="senha" minlength="8" required>
+        <button type="button" id="toggle-senha-registro" class="toggle-senha-btn" tabindex="-1" aria-label="Mostrar/ocultar senha">
+          <span id="icon-senha-registro">
+            <!-- Olho fechado (padrão) -->
+            <svg id="eye-closed-registro" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <ellipse cx="12" cy="12" rx="8" ry="5" stroke="#888" stroke-width="2" fill="none"/>
+              <line x1="5" y1="19" x2="19" y2="5" stroke="#888" stroke-width="2"/>
+              <circle cx="12" cy="12" r="2.5" fill="#888"/>
+            </svg>
+            <!-- Olho aberto (azul) -->
+            <svg id="eye-open-registro" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+              <ellipse cx="12" cy="12" rx="8" ry="5" stroke="#1976d2" stroke-width="2" fill="none"/>
+              <circle cx="12" cy="12" r="2.5" fill="#1976d2"/>
+            </svg>
+          </span>
+        </button>
+      </div>
       <button type="submit">Registrar</button>
     </form>
 
@@ -33,5 +49,22 @@
 
   <script src="js/config.js"></script>
   <script src="js/registro.js"></script>
+  <script>
+    // Visualização de senha registro
+    document.getElementById('toggle-senha-registro').addEventListener('click', function() {
+      const senhaInput = document.getElementById('senha');
+      const eyeOpen = document.getElementById('eye-open-registro');
+      const eyeClosed = document.getElementById('eye-closed-registro');
+      if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        eyeOpen.style.display = '';
+        eyeClosed.style.display = 'none';
+      } else {
+        senhaInput.type = 'password';
+        eyeOpen.style.display = 'none';
+        eyeClosed.style.display = '';
+      }
+    });
+  </script>
 </body>
 </html>

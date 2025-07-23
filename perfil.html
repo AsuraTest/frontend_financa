@@ -65,11 +65,45 @@
                 <h3>Alterar Senha</h3>
                 <label>
                     Senha Atual:
-                    <input type="password" id="current-password" required>
+                    <div class="senha-container">
+                      <input type="password" id="current-password" required>
+                      <button type="button" id="toggle-current-password" class="toggle-senha-btn" tabindex="-1" aria-label="Mostrar/ocultar senha">
+                        <span id="icon-current-password">
+                          <!-- Olho fechado (padrão) -->
+                          <svg id="eye-closed-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <ellipse cx="12" cy="12" rx="8" ry="5" stroke="#888" stroke-width="2" fill="none"/>
+                            <line x1="5" y1="19" x2="19" y2="5" stroke="#888" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="2.5" fill="#888"/>
+                          </svg>
+                          <!-- Olho aberto (azul) -->
+                          <svg id="eye-open-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+                            <ellipse cx="12" cy="12" rx="8" ry="5" stroke="#1976d2" stroke-width="2" fill="none"/>
+                            <circle cx="12" cy="12" r="2.5" fill="#1976d2"/>
+                          </svg>
+                        </span>
+                      </button>
+                    </div>
                 </label>
                 <label>
                     Nova Senha:
-                    <input type="password" id="new-password" required minlength="8">
+                    <div class="senha-container">
+                      <input type="password" id="new-password" required minlength="8">
+                      <button type="button" id="toggle-new-password" class="toggle-senha-btn" tabindex="-1" aria-label="Mostrar/ocultar senha">
+                        <span id="icon-new-password">
+                          <!-- Olho fechado (padrão) -->
+                          <svg id="eye-closed-new" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <ellipse cx="12" cy="12" rx="8" ry="5" stroke="#888" stroke-width="2" fill="none"/>
+                            <line x1="5" y1="19" x2="19" y2="5" stroke="#888" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="2.5" fill="#888"/>
+                          </svg>
+                          <!-- Olho aberto (azul) -->
+                          <svg id="eye-open-new" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+                            <ellipse cx="12" cy="12" rx="8" ry="5" stroke="#1976d2" stroke-width="2" fill="none"/>
+                            <circle cx="12" cy="12" r="2.5" fill="#1976d2"/>
+                          </svg>
+                        </span>
+                      </button>
+                    </div>
                 </label>
                 <button type="submit">Alterar Senha</button>
             </form>
@@ -83,6 +117,37 @@
 
     <script src="js/config.js"></script>
     <script src="js/perfil.js"></script>
+    <script>
+      // Visualização de senha perfil
+      document.getElementById('toggle-current-password').addEventListener('click', function() {
+        const senhaInput = document.getElementById('current-password');
+        const eyeOpen = document.getElementById('eye-open-current');
+        const eyeClosed = document.getElementById('eye-closed-current');
+        if (senhaInput.type === 'password') {
+          senhaInput.type = 'text';
+          eyeOpen.style.display = '';
+          eyeClosed.style.display = 'none';
+        } else {
+          senhaInput.type = 'password';
+          eyeOpen.style.display = 'none';
+          eyeClosed.style.display = '';
+        }
+      });
+      document.getElementById('toggle-new-password').addEventListener('click', function() {
+        const senhaInput = document.getElementById('new-password');
+        const eyeOpen = document.getElementById('eye-open-new');
+        const eyeClosed = document.getElementById('eye-closed-new');
+        if (senhaInput.type === 'password') {
+          senhaInput.type = 'text';
+          eyeOpen.style.display = '';
+          eyeClosed.style.display = 'none';
+        } else {
+          senhaInput.type = 'password';
+          eyeOpen.style.display = 'none';
+          eyeClosed.style.display = '';
+        }
+      });
+    </script>
 </body>
 
 </html>
