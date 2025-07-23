@@ -38,5 +38,35 @@ function isValidToken(token) {
     }
 }
 
+// Funções da sidebar para uso global
+window.toggleNav = function() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) {
+        if (sidebar.style.width === "150px") {
+            closeNav();
+        } else {
+            openNav();
+        }
+    }
+};
+
+window.openNav = function() {
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("main");
+    if (sidebar && main) {
+        sidebar.style.width = "150px";
+        main.style.marginRight = "150px";
+    }
+};
+
+window.closeNav = function() {
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("main");
+    if (sidebar && main) {
+        sidebar.style.width = "0";
+        main.style.marginRight = "0";
+    }
+};
+
 // Exporta as constantes para uso global
 const API_BASE_URL = window.API_CONFIG.API_BASE_URL;

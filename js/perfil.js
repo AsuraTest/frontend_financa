@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    // 2. Editar perfil
+    // Editar perfil
     document.getElementById('form-edit-profile').addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!response.ok) throw new Error('Erro ao atualizar perfil');
             
             alert('Perfil atualizado com sucesso!');
-            loadUserData(); // Recarregar dados
+            loadUserData();
             
         } catch (error) {
             console.error('Erro:', error);
@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // 3. Alterar senha
     document.getElementById('form-change-password').addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -89,7 +88,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // 4. Excluir conta
     document.getElementById('delete-account-btn').addEventListener('click', () => {
         if (confirm('Tem certeza que deseja excluir sua conta? TODOS seus dados serão apagados permanentemente!')) {
             deleteAccount();
@@ -119,6 +117,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    // Carregar dados iniciais
     loadUserData();
 });
+// Funções do menu lateral
+function openNav() {
+  const sidebar = document.getElementById("sidebar");
+  const main = document.getElementById("main");
+  if (sidebar && main) {
+    sidebar.style.width = "150px";
+    main.style.marginRight = "150px";
+  }
+}
+
+function closeNav() {
+  const sidebar = document.getElementById("sidebar");
+  const main = document.getElementById("main");
+  if (sidebar && main) {
+    sidebar.style.width = "0";
+    main.style.marginRight = "0";
+  }
+}
+
+function toggleNav() {
+  const sidebar = document.getElementById("sidebar");
+  if (sidebar) {
+    if (sidebar.style.width === "150px") {
+      closeNav();
+    } else {
+      openNav();
+    }
+  }
+}

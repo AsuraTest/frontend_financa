@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Meu Perfil</title>
     <link rel="stylesheet" href="css/perfil.css">
 </head>
+
 <body>
     <header>
+        <div class="left"></div>
         <h1 id="tituloperfil">Meu Perfil</h1>
+        <button class="openbtn" id="menuButton" onclick="toggleNav()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </button>
+
+        <div id="sidebar" class="sidebar">
+            <button class="closebtn" onclick="closeNav()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </button>
+            
+            <a href="index.html">Dashboard</a>
+            <a href="adicionar.html">Adicionar</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="login.html">Sair</a>
+        </div>
+        <div id="main"></div>
     </header>
 
     <div class="auth-container">
-
         <!-- Informações -->
         <section class="profile-section">
             <h2>Informações Pessoais</h2>
@@ -63,4 +84,5 @@
     <script src="js/config.js"></script>
     <script src="js/perfil.js"></script>
 </body>
+
 </html>
