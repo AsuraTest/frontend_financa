@@ -119,11 +119,26 @@ function processarTransacoes(transacoes) {
     const li = document.createElement('li');
     li.textContent = `${formatarData(t.data)} - ${t.descricao} - ${formatarMoeda(t.valor)} (${t.tipo})`;
     li.style.color = t.tipo === 'receita' ? '#28a745' : '#dc3545';
+    li.style.position = 'relative';
+
+    const btnEditar = document.createElement('button');
+    btnEditar.textContent = 'Editar';
+    btnEditar.id = `btn-editar-${t.id}`;
+    btnEditar.className = 'btn-editar';
+    btnEditar.onclick = () => editarTransacao(t);
+
+    const btnExcluir = document.createElement('button');
+    btnExcluir.textContent = 'Excluir';
+    btnExcluir.id = `btn-excluir-${t.id}`;
+    btnExcluir.className = 'btn-excluir';
+    btnExcluir.onclick = () => excluirTransacao(t.id);
+
+    li.appendChild(btnEditar);
+    li.appendChild(btnExcluir);
     lista.appendChild(li);
 
     const valor = parseFloat(t.valor);
     const categoria = t.categoria || (t.tipo === 'receita' ? 'Outras Receitas' : 'Outras Despesas');
-    
     if (t.tipo === 'receita') {
       totalReceitas += valor;
       categorias.receita[categoria] = (categorias.receita[categoria] || 0) + valor;
@@ -146,30 +161,16 @@ function atualizarGraficoPizza(categorias) {
   }
   const ctx = canvas.getContext('2d');
   console.log('Dados recebidos:', categorias);
-  
   // Verifica se há dados para mostrar
   const temReceitas = Object.keys(categorias.receita).length > 0;
   console.log('temReceitas: ', temReceitas, categorias.receita);
   const temDespesas = Object.keys(categorias.despesa).length > 0;
   console.log('temDespesas: ', temDespesas, categorias.despesa);
-
   if (!temReceitas && !temDespesas) {
-    canvas.style.display = 'none'; // Esconde o canvas se não houver dados
-    const container = document.getElementById('grafico-container');
-    if (container) {
-      container.innerHTML = `
-        <h2>Distribuição por Categoria</h2>
-        <div style="position: relative; height: 350px; width: 100%;">
-          <canvas id="grafico-pizza"></canvas>
-        </div>
-        <p style="text-align: center;">Nenhum dado disponível para o gráfico</p>
-      `;
-    }
+    canvas.style.display = 'none';
     return;
   }
-
   canvas.style.display = 'block';
-
   const data = {
     labels: [],
     datasets: [{
@@ -179,14 +180,12 @@ function atualizarGraficoPizza(categorias) {
       borderWidth: 1
     }]
   };
-
   // Adiciona receitas (verde)
   Object.entries(categorias.receita).forEach(([categoria, valor]) => {
     data.labels.push(`Receita: ${categoria}`);
     data.datasets[0].data.push(valor);
     data.datasets[0].backgroundColor.push('#4CAF50'); // Verde mais vibrante
   });
-
   // Adiciona despesas (vermelho)
   Object.entries(categorias.despesa).forEach(([categoria, valor]) => {
     data.labels.push(`Despesa: ${categoria}`);
@@ -194,14 +193,6 @@ function atualizarGraficoPizza(categorias) {
     data.datasets[0].backgroundColor.push('#F44336'); // Vermelho mais vibrante
   });
 
-  // Se não houver dados
-  if (data.datasets[0].data.length === 0) {
-    data.labels.push('Sem dados disponíveis');
-    data.datasets[0].data.push(1);
-    data.datasets[0].backgroundColor.push('#9E9E9E'); // Cinza
-  }
-
-  // Configurações do gráfico
   const config = {
     type: 'pie',
     data: data,
@@ -239,12 +230,11 @@ function atualizarGraficoPizza(categorias) {
       }
     }
   };
-
   // Destrói e recria o gráfico
-if (typeof graficoPizza !== 'undefined' && graficoPizza !== null) {
-  graficoPizza.destroy();
-}
-graficoPizza = new Chart(ctx, config);
+  if (typeof graficoPizza !== 'undefined' && graficoPizza !== null) {
+    graficoPizza.destroy();
+  }
+  graficoPizza = new Chart(ctx, config);
 }
 
 function formatarData(dataString) {
@@ -315,5 +305,87 @@ function toggleNav() {
     } else {
       openNav();
     }
+  }
+}
+
+// Função para excluir transação
+async function excluirTransacao(id) {
+  if (!confirm('Tem certeza que deseja excluir esta transação?')) return;
+  const token = localStorage.getItem('token');
+  try {
+    const response = await fetch(`${API_BASE_URL}/transacoes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (response.ok) {
+      alert('Transação excluída com sucesso!');
+      await carregarDashboard(token); // Recarrega e atualiza gráfico
+    } else {
+      const errorData = await response.json();
+      alert(errorData.error || 'Erro ao excluir transação.');
+    }
+  } catch (error) {
+    alert('Erro ao excluir transação.');
+  }
+}
+
+// Função para editar transação (inline)
+function editarTransacao(transacao) {
+  const lista = document.getElementById('transacoes');
+  const li = Array.from(lista.children).find(el => el.textContent.includes(transacao.descricao));
+  if (!li) return;
+  // Cria formulário de edição inline
+  li.innerHTML = `
+    <input type="date" id="edit-data" value="${transacao.data ? transacao.data.split('T')[0] : ''}" style="width:110px;" />
+    <input type="text" id="edit-descricao" value="${transacao.descricao}" style="width:110px;" />
+    <input type="number" id="edit-valor" value="${transacao.valor}" style="width:80px;" step="0.01" />
+    <select id="edit-tipo" style="width:90px;">
+      <option value="receita" ${transacao.tipo === 'receita' ? 'selected' : ''}>Receita</option>
+      <option value="despesa" ${transacao.tipo === 'despesa' ? 'selected' : ''}>Despesa</option>
+    </select>
+    <input type="text" id="edit-categoria" value="${transacao.categoria || ''}" style="width:110px;" />
+    <button onclick="salvarEdicaoTransacao(${transacao.id})">Salvar</button>
+    <button onclick="carregarDashboard(localStorage.getItem('token'))">Cancelar</button>
+  `;
+}
+
+// Função para salvar edição
+async function salvarEdicaoTransacao(id) {
+  const token = localStorage.getItem('token');
+  const data = document.getElementById('edit-data').value;
+  const descricao = document.getElementById('edit-descricao').value;
+  const valor = parseFloat(document.getElementById('edit-valor').value);
+  const tipo = document.getElementById('edit-tipo').value;
+  const categoria = document.getElementById('edit-categoria').value;
+  if (!descricao || !valor || !tipo) {
+    alert('Preencha todos os campos!');
+    return;
+  }
+  try {
+    const response = await fetch(`${API_BASE_URL}/transacoes/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data,
+        descricao,
+        valor,
+        tipo,
+        categoria
+      })
+    });
+    if (response.ok) {
+      alert('Transação editada com sucesso!');
+      await carregarDashboard(token); // Atualiza lista e gráfico
+    } else {
+      const errorData = await response.json();
+      alert(errorData.error || 'Erro ao editar transação.');
+    }
+  } catch (error) {
+    alert('Erro ao editar transação.');
   }
 }

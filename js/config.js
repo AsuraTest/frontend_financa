@@ -1,4 +1,3 @@
-// config.js
 window.API_CONFIG = {
     API_BASE_URL: 'http://localhost:3000',
     DEBUG: true
@@ -68,5 +67,4 @@ window.closeNav = function() {
     }
 };
 
-// Exporta as constantes para uso global
 const API_BASE_URL = window.API_CONFIG.API_BASE_URL;
